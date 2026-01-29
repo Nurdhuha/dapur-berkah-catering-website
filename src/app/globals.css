@@ -21,7 +21,10 @@
 
 html {
   font-size: 16px !important;
-  /* Fix size to avoid browser font size overrides */
+  scroll-behavior: smooth;
+  /* Fix Brave browser rendering artifacts */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -30,11 +33,21 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Force GPU acceleration to prevent rendering artifacts */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
-/* Fix for potential rendering artifacts (gray lines) in rounded containers with overflow hidden */
+/* ========================================
+   BRAVE BROWSER RENDERING FIXES
+   ======================================== */
+
+/* Fix for rendering artifacts (gray/dotted lines) in rounded containers */
 .rounded-3xl,
 .rounded-2xl,
+.rounded-xl,
+.rounded-lg,
+.rounded-md,
 .rounded-\[2\.5rem\],
 .rounded-\[3rem\],
 .rounded-full {
@@ -44,20 +57,40 @@ body {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  /* Prevent subpixel rendering issues */
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
-/* Fix for Brave browser dotted focus outlines */
+/* Fix for gradient backgrounds showing lines */
+[class*="bg-gradient"],
+[class*="from-"],
+[class*="to-"],
+[class*="via-"] {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Fix for section backgrounds */
+section {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Remove dotted focus outlines */
 *:focus {
   outline: none;
 }
 
 *:focus-visible {
   outline: 2px solid #f97316;
-  /* orange-500 for visible focus */
   outline-offset: 2px;
 }
 
-/* Remove dotted borders that some browsers add */
+/* Remove dotted borders on interactive elements */
 button,
 a,
 input,
@@ -77,4 +110,32 @@ a::-moz-focus-inner {
 /* Fix image rendering artifacts */
 img {
   image-rendering: -webkit-optimize-contrast;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Fix for overflow containers */
+[class*="overflow-hidden"] {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Fix for border rendering */
+[class*="border"] {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Prevent subpixel antialiasing issues on containers */
+.container,
+main,
+header,
+footer,
+nav {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
