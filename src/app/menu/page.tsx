@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft, Star } from "lucide-react";
@@ -11,7 +11,7 @@ import Badge from "@/components/ui/Badge";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 
-export default function MenuPage() {
+function MenuContent() {
     const searchParams = useSearchParams();
     const initialCategory = searchParams.get("category") || "all";
     const [activeCategory, setActiveCategory] = useState(initialCategory);
@@ -68,8 +68,8 @@ export default function MenuPage() {
                         <button
                             onClick={() => setActiveCategory("all")}
                             className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${activeCategory === "all"
-                                    ? "bg-orange-500 text-white shadow-sm"
-                                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                ? "bg-orange-500 text-white shadow-sm"
+                                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                                 }`}
                         >
                             Semua Menu
@@ -79,8 +79,8 @@ export default function MenuPage() {
                                 key={cat.slug}
                                 onClick={() => setActiveCategory(cat.slug)}
                                 className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${activeCategory === cat.slug
-                                        ? "bg-orange-500 text-white shadow-sm"
-                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                    ? "bg-orange-500 text-white shadow-sm"
+                                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                                     }`}
                             >
                                 {cat.label}
@@ -202,5 +202,17 @@ export default function MenuPage() {
 
             <Footer />
         </main>
+    );
+}
+
+export default function MenuPage() {
+    return (
+        <Suspense fallback={
+            <main className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-gray-600">Loading...</div>
+            </main>
+        }>
+            <MenuContent />
+        </Suspense>
     );
 }
