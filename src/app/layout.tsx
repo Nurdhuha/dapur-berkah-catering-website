@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteData } from "@/config/site-data";
 import PromoBar from "@/components/ui/PromoBar";
+import FloatingWA from "@/components/FloatingWA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,11 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
         )}
+        <FloatingWA
+          whatsappNumbers={siteData.general.whatsappNumbers}
+          message={siteData.general.whatsappMessage}
+          features={siteData.features}
+        />
       </body>
     </html>
   );
