@@ -31,7 +31,7 @@ export const siteData = {
         headline: "CATERING BERKAH",
         subheadline: "Hidangan lezat untuk setiap momen spesial Anda. Dari acara pernikahan hingga meeting kantor.",
         ctaText: "Pesan Sekarang",
-        image: "dapur-berkah-catering/public/tumpeng-nobg.png",
+        image: "/tumpeng-nobg.png",
     },
     promoBar: {
         message: "🎉 Promo Spesial: Diskon 15% untuk Pemesanan Paket Pernikahan! Berlaku hingga akhir bulan.",

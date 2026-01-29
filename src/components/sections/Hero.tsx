@@ -21,7 +21,7 @@ const defaultHero = {
     headline: "CATERING BERKAH",
     subheadline: "Hidangan lezat untuk setiap momen spesial Anda",
     ctaText: "Pesan Sekarang",
-    image: "https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1000&auto=format&fit=crop",
+    image: "/tumpeng-nobg.png",
 };
 
 const Hero = ({ heroData }: HeroProps) => {
