@@ -45,3 +45,36 @@ body {
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+
+/* Fix for Brave browser dotted focus outlines */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #f97316;
+  /* orange-500 for visible focus */
+  outline-offset: 2px;
+}
+
+/* Remove dotted borders that some browsers add */
+button,
+a,
+input,
+select,
+textarea {
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button::-moz-focus-inner,
+a::-moz-focus-inner {
+  border: 0;
+}
+
+/* Fix image rendering artifacts */
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
