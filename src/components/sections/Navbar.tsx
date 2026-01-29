@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Menu, X } from "lucide-react";
 import { siteData } from "@/config/site-data";
 import Container from "@/components/ui/Container";
@@ -15,6 +16,7 @@ const Navbar = ({ brandName }: NavbarProps) => {
 
     // Use prop if provided, otherwise fall back to siteData
     const displayBrandName = brandName || siteData.general.brandName;
+    const logoSrc = siteData.general.logo || "/logo-dapur.png";
     const waNumber = siteData.general.whatsappNumbers[0];
     const waMessage = siteData.general.whatsappMessage || "Halo, saya ingin bertanya tentang catering.";
 
@@ -28,8 +30,17 @@ const Navbar = ({ brandName }: NavbarProps) => {
             <Container>
                 <div className="flex items-center justify-between h-20 gap-4">
                     {/* Logo */}
-                    <Link href="/" className="text-xl md:text-2xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent shrink-0">
-                        {displayBrandName}
+                    <Link href="/" className="flex items-center gap-2 shrink-0">
+                        <Image
+                            src={logoSrc}
+                            alt={displayBrandName}
+                            width={48}
+                            height={48}
+                            className="w-12 h-12 object-contain"
+                        />
+                        <span className="hidden sm:block text-xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
+                            {displayBrandName}
+                        </span>
                     </Link>
 
                     {/* Nav Links - Hidden on mobile */}

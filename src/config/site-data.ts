@@ -8,6 +8,7 @@ export const siteData = {
     },
     general: {
         brandName: "Dapur Berkah Catering",
+        logo: "/logo-dapur.png",
         whatsappNumbers: [
             "6281234567890",
             "6289876543210",
