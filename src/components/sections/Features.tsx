@@ -2,11 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Laptop, Shirt, Home, Gamepad, Watch, Camera, ArrowRight, Star, Utensils, Box, Coffee, ChefHat, Truck } from "lucide-react";
 import { siteData } from "@/config/site-data";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+
+// Tiny neutral blur placeholder
+const BLUR_DATA_URL =
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNlZWVlZWUiLz48L3N2Zz4=";
 
 const iconMap = {
     Laptop,
@@ -89,15 +94,19 @@ const Features = () => {
                         {siteData.featuredProducts.slice(0, 4).map((product, idx) => (
                             <div key={idx} className="group cursor-pointer bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow">
                                 <div className="relative aspect-[4/5] overflow-hidden">
-                                    <img
+                                    <Image
                                         src={product.image}
                                         alt={product.title}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        fill
+                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        placeholder="blur"
+                                        blurDataURL={BLUR_DATA_URL}
                                     />
 
                                     {/* Badge */}
                                     {product.badge && (
-                                        <div className="absolute top-4 left-4">
+                                        <div className="absolute top-4 left-4 z-10">
                                             <Badge className="bg-white text-gray-900 shadow-sm border border-gray-100 px-3 py-1">
                                                 {product.badge}
                                             </Badge>
@@ -105,11 +114,11 @@ const Features = () => {
                                     )}
 
                                     {/* Wishlist Button */}
-                                    <button className="absolute top-4 right-4 p-2.5 bg-white/80 backdrop-blur-sm rounded-full text-gray-600 hover:text-pink-500 opacity-0 group-hover:opacity-100 transition-all shadow-sm">
+                                    <button className="absolute top-4 right-4 z-10 p-2.5 bg-white/80 backdrop-blur-sm rounded-full text-gray-600 hover:text-pink-500 opacity-0 group-hover:opacity-100 transition-all shadow-sm">
                                         <Star className="w-4 h-4" />
                                     </button>
 
-                                    <div className="absolute bottom-4 inset-x-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                                    <div className="absolute bottom-4 inset-x-4 z-10 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
                                         <Button
                                             variant="primary"
                                             className="w-full h-11 text-xs"

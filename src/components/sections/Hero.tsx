@@ -2,9 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { siteData } from "@/config/site-data";
+
+// Tiny 1x1 blur placeholder
+const BLUR_DATA_URL =
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmN2YwZWIiLz48L3N2Zz4=";
 
 // Props interface for Hero component
 interface HeroProps {
@@ -84,10 +89,15 @@ const Hero = ({ heroData }: HeroProps) => {
 
                         <div className="relative group">
                             <div className="relative aspect-square max-w-md mx-auto transform transition-transform duration-500 group-hover:scale-105">
-                                <img
+                                <Image
                                     src={hero.image}
                                     alt="Featured Product"
-                                    className="w-full h-full object-contain drop-shadow-2xl"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-contain drop-shadow-2xl"
+                                    priority
+                                    placeholder="blur"
+                                    blurDataURL={BLUR_DATA_URL}
                                 />
                             </div>
                             {/* Floating badges for visual interest */}
